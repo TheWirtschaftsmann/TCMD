@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_PROG" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <PROGDIR>
+    <NAME>ZFI_TCMD_ANALYSIS</NAME>
+    <SUBC>1</SUBC>
+    <APPL>F</APPL>
+    <RLOAD>E</RLOAD>
+    <FIXPT>X</FIXPT>
+    <UCCHECK>X</UCCHECK>
+   </PROGDIR>
+   <TPOOL>
+    <item>
+     <ID>I</ID>
+     <KEY>001</KEY>
+     <ENTRY>General selections</ENTRY>
+     <LENGTH>37</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>002</KEY>
+     <ENTRY>Display options</ENTRY>
+     <LENGTH>37</LENGTH>
+    </item>
+    <item>
+     <ID>R</ID>
+     <ENTRY>Report on tax codes master data</ENTRY>
+     <LENGTH>31</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_LAND</KEY>
+     <ENTRY>.</ENTRY>
+     <LENGTH>9</LENGTH>
+     <SPLIT>D</SPLIT>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_SET</KEY>
+     <ENTRY>Display settings</ENTRY>
+     <LENGTH>24</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_TRN</KEY>
+     <ENTRY>Display translations</ENTRY>
+     <LENGTH>28</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>S_LANG</KEY>
+     <ENTRY>.</ENTRY>
+     <LENGTH>9</LENGTH>
+     <SPLIT>D</SPLIT>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>S_MWSKZ</KEY>
+     <ENTRY>.</ENTRY>
+     <LENGTH>9</LENGTH>
+     <SPLIT>D</SPLIT>
+    </item>
+   </TPOOL>
+   <I18N_TPOOL>
+    <item>
+     <LANGUAGE>8</LANGUAGE>
+     <TEXTPOOL>
+      <item>
+       <ID>I</ID>
+       <KEY>001</KEY>
+       <ENTRY>Загальні параметри вибору</ENTRY>
+       <LENGTH>37</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>002</KEY>
+       <ENTRY>Параметри перегляду</ENTRY>
+       <LENGTH>37</LENGTH>
+      </item>
+      <item>
+       <ID>R</ID>
+       <ENTRY>Звіт: основні дані кодів податку</ENTRY>
+       <LENGTH>70</LENGTH>
+      </item>
+      <item>
+       <ID>S</ID>
+       <KEY>P_SET</KEY>
+       <ENTRY>Перегляд налаштувань</ENTRY>
+       <LENGTH>38</LENGTH>
+      </item>
+      <item>
+       <ID>S</ID>
+       <KEY>P_TRN</KEY>
+       <ENTRY>Перегляд перекладів</ENTRY>
+       <LENGTH>38</LENGTH>
+      </item>
+      <item>
+       <ID>S</ID>
+       <KEY>P_LAND</KEY>
+       <ENTRY>.</ENTRY>
+       <LENGTH>9</LENGTH>
+       <SPLIT>D</SPLIT>
+      </item>
+      <item>
+       <ID>S</ID>
+       <KEY>S_LANG</KEY>
+       <ENTRY>.</ENTRY>
+       <LENGTH>9</LENGTH>
+       <SPLIT>D</SPLIT>
+      </item>
+      <item>
+       <ID>S</ID>
+       <KEY>S_MWSKZ</KEY>
+       <ENTRY>.</ENTRY>
+       <LENGTH>9</LENGTH>
+       <SPLIT>D</SPLIT>
+      </item>
+     </TEXTPOOL>
+    </item>
+    <item>
+     <LANGUAGE>R</LANGUAGE>
+     <TEXTPOOL>
+      <item>
+       <ID>I</ID>
+       <KEY>001</KEY>
+       <ENTRY>Общие параметры</ENTRY>
+       <LENGTH>37</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>002</KEY>
+       <ENTRY>Параметры просмотра</ENTRY>
+       <LENGTH>37</LENGTH>
+      </item>
+      <item>
+       <ID>R</ID>
+       <ENTRY>Отчет: основные данные кодов налога</ENTRY>
+       <LENGTH>70</LENGTH>
+      </item>
+      <item>
+       <ID>S</ID>
+       <KEY>P_SET</KEY>
+       <ENTRY>Просмотр настроек</ENTRY>
+       <LENGTH>38</LENGTH>
+      </item>
+      <item>
+       <ID>S</ID>
+       <KEY>P_TRN</KEY>
+       <ENTRY>Просмотр переводов</ENTRY>
+       <LENGTH>38</LENGTH>
+      </item>
+      <item>
+       <ID>S</ID>
+       <KEY>P_LAND</KEY>
+       <ENTRY>.</ENTRY>
+       <LENGTH>9</LENGTH>
+       <SPLIT>D</SPLIT>
+      </item>
+      <item>
+       <ID>S</ID>
+       <KEY>S_LANG</KEY>
+       <ENTRY>.</ENTRY>
+       <LENGTH>9</LENGTH>
+       <SPLIT>D</SPLIT>
+      </item>
+      <item>
+       <ID>S</ID>
+       <KEY>S_MWSKZ</KEY>
+       <ENTRY>.</ENTRY>
+       <LENGTH>9</LENGTH>
+       <SPLIT>D</SPLIT>
+      </item>
+     </TEXTPOOL>
+    </item>
+   </I18N_TPOOL>
+  </asx:values>
+ </asx:abap>
+</abapGit>
