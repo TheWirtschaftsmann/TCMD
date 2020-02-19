@@ -17,6 +17,8 @@
       p_trn type xfeld,
     end of ty_selopts.
 
+  types: ty_tt_tc_names type standard table of t007s with default key.
+
   tables: t005, t007a, t007s.
 
   data: ok_code       type sy-ucomm,
