@@ -33,8 +33,12 @@
        <ELEMENT_OF>SCREEN</ELEMENT_OF>
        <LINE>001</LINE>
        <COLUMN>001</COLUMN>
-       <LENGTH>255</LENGTH>
+       <LENGTH>240</LENGTH>
        <HEIGHT>200</HEIGHT>
+       <C_RESIZE_V>X</C_RESIZE_V>
+       <C_RESIZE_H>X</C_RESIZE_H>
+       <C_LINE_MIN>009</C_LINE_MIN>
+       <C_COLN_MIN>047</C_COLN_MIN>
       </RPY_DYCATT>
      </CONTAINERS>
      <FIELDS>
@@ -167,6 +171,12 @@
       <INT_NOTE>Main report status</INT_NOTE>
      </RSMPE_ATRT>
     </DOC>
+    <TIT>
+     <RSMPE_TITT>
+      <CODE>GUI_TITLE</CODE>
+      <TEXT>Tax codes master data</TEXT>
+     </RSMPE_TITT>
+    </TIT>
    </CUA>
    <TPOOL>
     <item>

@@ -21,7 +21,7 @@ class lcl_controller implementation.
   endmethod.
 
   method set_gui_status.
-    set titlebar  'GUI_TITLE' with text-100.
+    set titlebar  'GUI_TITLE'." with text-100.
     set pf-status 'MAIN_STATUS'.
   endmethod.
 
