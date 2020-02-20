@@ -100,6 +100,5 @@ class lcl_view implementation.
     add_exclude cl_gui_alv_grid=>mc_fc_loc_append_row.
     add_exclude cl_gui_alv_grid=>mc_fc_check.
     add_exclude cl_gui_alv_grid=>mc_fc_refresh.
-
   endmethod.
 endclass.
