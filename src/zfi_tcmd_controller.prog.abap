@@ -35,7 +35,7 @@ class lcl_controller implementation.
     if as_selopts-p_trn = abap_true.
       at_tc_names = me->o_data->get_names( ).
     elseif as_selopts-p_set = abap_true.
-
+      me->o_data->get_settings( ).
     else.
       " Reserved for future cases
     endif.
