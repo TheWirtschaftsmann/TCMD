@@ -9,5 +9,5 @@ selection-screen end of block b1.
 selection-screen begin of block b2 with frame title text-002.
 parameters:     p_set radiobutton group rb1 user-command act default 'X'.
 parameters:     p_trn radiobutton group rb1.
-select-options: s_lang for t007s-spras modif id mod.
+select-options: s_lang for t007s-spras.
 selection-screen end of block b2.
