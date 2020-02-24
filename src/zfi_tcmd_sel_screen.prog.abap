@@ -2,7 +2,8 @@
 *&  Include for selection screen elementss
 *&---------------------------------------------------------------------*
 selection-screen begin of block b1 with frame title text-001.
-parameters:     p_land type t005-land1 obligatory.
+parameters:     p_land  type t005-land1 obligatory.
+parameters:     p_ktopl type t004-ktopl.
 select-options: s_mwskz for t007a-mwskz.
 selection-screen end of block b1.
 

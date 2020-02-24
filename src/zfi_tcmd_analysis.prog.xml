@@ -174,7 +174,7 @@
     <TIT>
      <RSMPE_TITT>
       <CODE>GUI_TITLE</CODE>
-      <TEXT>Tax codes master data</TEXT>
+      <TEXT>Tax codes master data - test to delete</TEXT>
      </RSMPE_TITT>
     </TIT>
    </CUA>
@@ -201,6 +201,13 @@
      <ID>R</ID>
      <ENTRY>Report on tax codes master data</ENTRY>
      <LENGTH>31</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_KTOPL</KEY>
+     <ENTRY>.</ENTRY>
+     <LENGTH>9</LENGTH>
+     <SPLIT>D</SPLIT>
     </item>
     <item>
      <ID>S</ID>

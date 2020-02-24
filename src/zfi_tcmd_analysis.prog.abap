@@ -16,6 +16,7 @@ form main.
   data: lo_ex type ref to lcx_exception.
 
   gs_selopt-land1 = p_land.
+  gs_selopt-ktopl = p_ktopl.
   gs_selopt-mwskz = s_mwskz[].
   gs_selopt-spras = s_lang[].
   gs_selopt-p_set = p_set.

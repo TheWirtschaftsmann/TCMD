@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZFI_TCMD_RATE</ROLLNAME>
+    <DDLANGUAGE>E</DDLANGUAGE>
+    <DOMNAME>DEC4_2</DOMNAME>
+    <HEADLEN>08</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>15</SCRLEN2>
+    <SCRLEN3>20</SCRLEN3>
+    <DDTEXT>Tax code rate</DDTEXT>
+    <REPTEXT>Tax rate</REPTEXT>
+    <SCRTEXT_S>Tax rate</SCRTEXT_S>
+    <SCRTEXT_M>Tax rate</SCRTEXT_M>
+    <SCRTEXT_L>Tax rate</SCRTEXT_L>
+    <DTELMASTER>E</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+   <I18N_LANGS>
+    <LANGU>8</LANGU>
+    <LANGU>R</LANGU>
+   </I18N_LANGS>
+   <DD04_TEXTS>
+    <item>
+     <DDLANGUAGE>8</DDLANGUAGE>
+     <DDTEXT>Ставка податку</DDTEXT>
+     <REPTEXT>Ставка</REPTEXT>
+     <SCRTEXT_S>Ставка под</SCRTEXT_S>
+     <SCRTEXT_M>Ставка податку</SCRTEXT_M>
+     <SCRTEXT_L>Ставка податку</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>R</DDLANGUAGE>
+     <DDTEXT>Ставка налога</DDTEXT>
+     <REPTEXT>Ставка</REPTEXT>
+     <SCRTEXT_S>Ставка нал</SCRTEXT_S>
+     <SCRTEXT_M>Ставка налога</SCRTEXT_M>
+     <SCRTEXT_L>Ставка налога</SCRTEXT_L>
+    </item>
+   </DD04_TEXTS>
+  </asx:values>
+ </asx:abap>
+</abapGit>
