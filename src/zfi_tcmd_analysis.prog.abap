@@ -19,8 +19,11 @@ form main.
   gs_selopt-ktopl = p_ktopl.
   gs_selopt-mwskz = s_mwskz[].
   gs_selopt-spras = s_lang[].
+  gs_selopt-lang  = p_lang.
   gs_selopt-p_set = p_set.
   gs_selopt-p_trn = p_trn.
+
+  perform check_input_values.
 
   try.
       create object go_controller exporting is_selopts = gs_selopt.

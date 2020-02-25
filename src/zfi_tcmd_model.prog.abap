@@ -14,7 +14,8 @@ class lcl_tc_master_data definition.
 
     constants:
       c_pricing type t683s-kvewe value 'A',
-      c_taxes   type t683s-kappl value 'TX'.
+      c_taxes   type t683s-kappl value 'TX',
+      c_english type spras       value 'E'.
 
     data: as_selopts      type ty_selopts.
     data: av_kalsm        type kalsm.
@@ -196,10 +197,18 @@ class lcl_tc_master_data implementation.
   endmethod.
 
   method get_tc_name.
+    data: lv_spras type spras.
+
+    if as_selopts-lang is initial.
+      lv_spras = c_english.
+    else.
+      lv_spras = as_selopts-lang.
+    endif.
+
     select single text1
       from t007s
       into rv_name
-      where spras = 'E'
+      where spras = lv_spras
       and mwskz = iv_mwskz
       and kalsm = av_kalsm.
   endmethod.

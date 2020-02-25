@@ -13,6 +13,7 @@
       ktopl type ktopl,
       mwskz type ty_mwskz_range,
       spras type ty_spras_range,
+      lang  type spras,
       p_set type xfeld,
       p_trn type xfeld,
     end of ty_selopts.

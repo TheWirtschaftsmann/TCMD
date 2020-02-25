@@ -198,6 +198,12 @@
      <LENGTH>37</LENGTH>
     </item>
     <item>
+     <ID>I</ID>
+     <KEY>101</KEY>
+     <ENTRY>Chart of account is mandatory for this report mode</ENTRY>
+     <LENGTH>50</LENGTH>
+    </item>
+    <item>
      <ID>R</ID>
      <ENTRY>Report on tax codes master data</ENTRY>
      <LENGTH>31</LENGTH>
@@ -212,6 +218,13 @@
     <item>
      <ID>S</ID>
      <KEY>P_LAND</KEY>
+     <ENTRY>.</ENTRY>
+     <LENGTH>9</LENGTH>
+     <SPLIT>D</SPLIT>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_LANG</KEY>
      <ENTRY>.</ENTRY>
      <LENGTH>9</LENGTH>
      <SPLIT>D</SPLIT>
