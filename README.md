@@ -20,7 +20,7 @@ This report is intended for SAP consultants, working on implementation of VAT fu
 
 Selection screen of the report:
 
-![selection_screen](C:\GIT\TCMD\docs\Pictures\selection_screen.jpg)
+![selection_screen](https://github.com/TheWirtschaftsmann/TCMD/blob/master/docs/Pictures/selection_screen.jpg)
 
 Examples of each report mode can be found below. 
 
