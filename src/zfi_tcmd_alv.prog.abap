@@ -8,11 +8,12 @@ end-of-definition.
 
 class lcl_view definition inheriting from cl_gui_alv_grid.
   public section.
-    methods: constructor importing iv_parent type ref to cl_gui_container.
-    methods: setup_alv   changing  ct_data   type ty_tt_tc_names.
-
+    methods: constructor      importing iv_parent  type ref to cl_gui_container.
+    methods: setup_alv        importing iv_names   type abap_bool
+                              changing ct_data     type standard table.
   private section.
-    methods: build_fieldcatalog returning value(rt_fieldcat)  type lvc_t_fcat.
+    methods: build_fieldcatalog importing iv_names type abap_bool
+                                returning value(rt_fieldcat)  type lvc_t_fcat.
     methods: build_layout       returning value(rs_layout)    type lvc_s_layo.
     methods: build_variant      returning value(rs_variant)   type disvariant.
     methods: exclude_buttons    returning value(rt_excluding) type ui_functions.
@@ -35,7 +36,7 @@ class lcl_view implementation.
     " Prepare technical components of ALV-view
     ls_layout    = me->build_layout( ).
     ls_variant   = me->build_variant( ).
-    lt_fieldcat  = me->build_fieldcatalog( ).
+    lt_fieldcat  = me->build_fieldcatalog( iv_names ).
     lt_excluding = me->exclude_buttons( ).
 
     " Pass data for ALV-display
@@ -49,18 +50,22 @@ class lcl_view implementation.
       changing
         it_outtab            = ct_data
         it_fieldcatalog      = lt_fieldcat.
-
   endmethod.
 
   method build_fieldcatalog.
     constants:
-      lc_tc_name_str type slis_tabname value 'T007S'.
+      lc_tc_name_str type slis_tabname value 'T007S',
+      lc_tc_sets_str type slis_tabname value 'ZFI_TCMD_TC_SETTINGS'.
 
     data:
       lv_structure type slis_tabname,
       lt_fieldcat  type lvc_t_fcat.
 
-    lv_structure = lc_tc_name_str.
+    if iv_names = abap_true.
+      lv_structure = lc_tc_name_str.
+    else.
+      lv_structure = lc_tc_sets_str.
+    endif.
 
     call function 'LVC_FIELDCATALOG_MERGE'
       exporting

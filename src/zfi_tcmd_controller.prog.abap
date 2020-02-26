@@ -9,10 +9,11 @@ class lcl_controller definition.
 
   private section.
     data:
-      at_tc_names type ty_tt_tc_names,
-      as_selopts  type ty_selopts,
-      o_data      type ref to lcl_tc_master_data,
-      o_view      type ref to lcl_view.
+      at_tc_names    type ty_tt_tc_names,
+      at_tc_settings type ty_tt_tc_settings,
+      as_selopts     type ty_selopts,
+      o_data         type ref to lcl_tc_master_data,
+      o_view         type ref to lcl_view.
 endclass.
 
 class lcl_controller implementation.
@@ -26,24 +27,23 @@ class lcl_controller implementation.
   endmethod.
 
   method process_before_output.
-
-    data: lv_message  type string.
+    data: lv_message type string.
 
     create object me->o_data
       exporting is_selopts = as_selopts.
-
-    if as_selopts-p_trn = abap_true.
-      at_tc_names = me->o_data->get_names( ).
-    elseif as_selopts-p_set = abap_true.
-      me->o_data->get_settings( ).
-    else.
-      " Reserved for future cases
-    endif.
 
     create object me->o_view
       exporting
         iv_parent = iv_container.
 
-    me->o_view->setup_alv( changing ct_data = at_tc_names ).
+    if as_selopts-p_trn = abap_true.
+      at_tc_names    = me->o_data->get_names( ).
+      me->o_view->setup_alv( exporting iv_names = as_selopts-p_trn changing ct_data  = at_tc_names ).
+    elseif as_selopts-p_set = abap_true.
+      at_tc_settings = me->o_data->get_settings( ).
+      me->o_view->setup_alv( exporting iv_names = as_selopts-p_trn changing ct_data  = at_tc_settings ).
+    else.
+      " Reserved for future cases
+    endif.
   endmethod.
 endclass.

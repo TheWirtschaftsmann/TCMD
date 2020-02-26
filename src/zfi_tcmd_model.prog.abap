@@ -3,9 +3,9 @@
 *&---------------------------------------------------------------------*
 class lcl_tc_master_data definition.
   public section.
-    methods: constructor  importing is_selopts         type ty_selopts.
-    methods: get_names    returning value(rt_tc_names) type ty_tt_tc_names.
-    methods: get_settings.
+    methods: constructor  importing is_selopts            type ty_selopts.
+    methods: get_names    returning value(rt_tc_names)    type ty_tt_tc_names.
+    methods: get_settings returning value(rt_tc_settings) type ty_tt_tc_settings .
 
   private section.
     types: ty_tt_conditions type standard table of t683s with default key.
@@ -103,6 +103,8 @@ class lcl_tc_master_data implementation.
         append ls_settings to at_settings.
       endloop.
     endloop.
+
+    rt_tc_settings = at_settings.
   endmethod.
 
   method get_tax_keys.
