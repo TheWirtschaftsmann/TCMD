@@ -105,6 +105,6 @@ Tax codes settings should be displayed as a standard ALV-report with the followi
 | P1       | Acqui. tax, 20% | V    |                 | MWVS      | VST         | 20          | 178410     |
 | S1       | Sales, 20%      | A    | S2              | MWAS      | MWS         | 20          | 176410     |
 
-## 6. Exceptions handling
+## 5. Exceptions handling
 
 Separate local class `LCX_EXCEPTION` will be implemented to handle exceptions.
