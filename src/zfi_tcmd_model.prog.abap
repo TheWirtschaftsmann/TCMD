@@ -23,7 +23,8 @@ class lcl_tc_master_data definition.
     data: at_conditions   type ty_tt_conditions.
     data: at_cond_records type table of a003.
     data: ar_conditions   type ty_r_kschl.
-    data: ar_acc_keys     type ty_r_kvsl1.
+    data: ar_acc_keys     type ty_r_kvsl1.  " Determination of GL account is managed on tax code level
+    data: ar_acc_keys_glb type ty_r_kvsl1.  " Determination of GL account is managed on account key level
     data: at_gl_accounts  type table of t030k.
 
     methods: set_tax_calc_procedure.
@@ -31,6 +32,7 @@ class lcl_tc_master_data definition.
     methods: get_tax_conditions.
     methods: get_tax_rates.
     methods: get_gl_accounts.
+    methods: is_glb_acc_key importing iv_kvsl1 type kvsl1 returning value(rv_yes)   type abap_bool.
     methods: get_tc_rate    importing iv_knumh type knumh returning value(rv_rate)  type zfi_tcmd_rate.
     methods: get_tc_name    importing iv_mwskz type mwskz returning value(rv_name)  type text1.
     methods: get_acc_key    importing iv_kschl type kschl returning value(rv_key)   type kvsl1.
@@ -141,12 +143,18 @@ class lcl_tc_master_data implementation.
 
     loop at at_conditions assigning <condition>.
       clear: ls_condition-low, ls_acc_key-low.
-      ls_condition-low = <condition>-kschl.
-      append ls_condition to ar_conditions.
-
       if <condition>-kvsl1 is not initial.
+        " Append condition
+        ls_condition-low = <condition>-kschl.
+        append ls_condition to ar_conditions.
+        " Append account key
         ls_acc_key-low = <condition>-kvsl1.
-        append ls_acc_key to ar_acc_keys.
+
+        if is_glb_acc_key( <condition>-kvsl1 ) = abap_true.
+          append ls_acc_key to ar_acc_keys_glb.
+        else.
+          append ls_acc_key to ar_acc_keys.
+        endif.
       endif.
     endloop.
   endmethod.
@@ -183,18 +191,33 @@ class lcl_tc_master_data implementation.
   endmethod.
 
   method get_gl_accounts.
+    " Determination of GL account is managed on tax code level
     select *
       from t030k
       into corresponding fields of table at_gl_accounts
       where ktopl = as_selopts-ktopl
       and ktosl in ar_acc_keys
       and mwskz in as_selopts-mwskz.
+
+    " Determination of GL account is managed on account key level
+    select *
+      from t030k
+      appending corresponding fields of table at_gl_accounts
+      where ktopl = as_selopts-ktopl
+      and ktosl in ar_acc_keys_glb
+      and mwskz = ''.
   endmethod.
 
   method get_gl_account.
     data: ls_gl_account like line of at_gl_accounts.
 
-    read table at_gl_accounts into ls_gl_account with key ktopl = as_selopts-ktopl ktosl = iv_key mwskz = iv_mwskz.
+    if iv_key in ar_acc_keys.
+      read table at_gl_accounts into ls_gl_account with key ktopl = as_selopts-ktopl ktosl = iv_key mwskz = iv_mwskz.
+    elseif iv_key in ar_acc_keys_glb.
+      read table at_gl_accounts into ls_gl_account with key ktopl = as_selopts-ktopl ktosl = iv_key mwskz = space.
+    else.
+      " Should not reach this stage
+    endif.
 
     if sy-subrc is initial.
       rv_konts = ls_gl_account-konts.
@@ -216,5 +239,21 @@ class lcl_tc_master_data implementation.
       where spras = lv_spras
       and mwskz = iv_mwskz
       and kalsm = av_kalsm.
+  endmethod.
+
+  method is_glb_acc_key.
+    " Check if account determination is managed on acc. key or tax code level
+    data: lv_xkomo type t030r-xkomo.
+
+    rv_yes = abap_false.
+
+    select single xkomo from t030r
+      into lv_xkomo
+      where ktopl = as_selopts-ktopl
+      and   ktosl = iv_kvsl1.
+
+    if sy-subrc is initial and lv_xkomo is initial.
+      rv_yes = abap_true.
+    endif.
   endmethod.
 endclass.
