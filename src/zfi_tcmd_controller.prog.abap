@@ -22,7 +22,7 @@ class lcl_controller implementation.
   endmethod.
 
   method set_gui_status.
-    set titlebar  'GUI_TITLE'." with text-100.
+    set titlebar  'GUI_TITLE'.
     set pf-status 'MAIN_STATUS'.
   endmethod.
 
@@ -36,12 +36,12 @@ class lcl_controller implementation.
       exporting
         iv_parent = iv_container.
 
-    if as_selopts-p_trn = abap_true.
-      at_tc_names    = me->o_data->get_names( ).
-      me->o_view->setup_alv( exporting iv_names = as_selopts-p_trn changing ct_data  = at_tc_names ).
-    elseif as_selopts-p_set = abap_true.
+    if as_selopts-p_set = abap_true.
       at_tc_settings = me->o_data->get_settings( ).
-      me->o_view->setup_alv( exporting iv_names = as_selopts-p_trn changing ct_data  = at_tc_settings ).
+      me->o_view->setup_alv( exporting iv_set_mode = as_selopts-p_set changing ct_data  = at_tc_settings ).
+    elseif as_selopts-p_trn = abap_true.
+      at_tc_names    = me->o_data->get_names( ).
+      me->o_view->setup_alv( exporting iv_set_mode = as_selopts-p_set changing ct_data  = at_tc_names ).
     else.
       " Reserved for future cases
     endif.

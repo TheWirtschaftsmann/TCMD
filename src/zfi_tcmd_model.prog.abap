@@ -20,7 +20,6 @@ class lcl_tc_master_data definition.
     data: as_selopts      type ty_selopts.
     data: av_kalsm        type kalsm.
     data: at_tc_keys      type ty_tt_tc_keys.
-    data: at_settings     type ty_tt_tc_settings.
     data: at_conditions   type ty_tt_conditions.
     data: at_cond_records type table of a003.
     data: ar_conditions   type ty_r_kschl.
@@ -31,12 +30,13 @@ class lcl_tc_master_data definition.
     methods: get_tax_keys.
     methods: get_tax_conditions.
     methods: get_tax_rates.
-    methods: get_tc_rate importing iv_knumh type knumh
-                         returning value(rv_rate) type zfi_tcmd_rate.
-    methods: get_tc_name importing iv_mwskz type mwskz returning value(rv_name) type text1.
-    methods: get_acc_key importing iv_kschl type kschl returning value(rv_key) type kvsl1.
     methods: get_gl_accounts.
-    methods: get_gl_account importing iv_mwskz type mwskz iv_key type ktosl returning value(rv_konts) type saknr.
+    methods: get_tc_rate    importing iv_knumh type knumh returning value(rv_rate)  type zfi_tcmd_rate.
+    methods: get_tc_name    importing iv_mwskz type mwskz returning value(rv_name)  type text1.
+    methods: get_acc_key    importing iv_kschl type kschl returning value(rv_key)   type kvsl1.
+    methods: get_gl_account importing iv_mwskz type mwskz
+                                      iv_key   type ktosl returning value(rv_konts) type saknr.
+
 endclass.
 
 class lcl_tc_master_data implementation.
@@ -59,27 +59,32 @@ class lcl_tc_master_data implementation.
       where spras in as_selopts-spras
       and   kalsm = av_kalsm
       and   mwskz in as_selopts-mwskz.
+
+    sort rt_tc_names by mwskz spras ascending.
   endmethod.
 
   method get_settings.
-
-    data: ls_settings like line of at_settings.
+    data: ls_settings like line of rt_tc_settings.
 
     field-symbols:
        <tc>   like line of at_tc_keys,
        <cond> like line of at_cond_records.
 
+    " Extract components of tax codes' master data
     me->get_tax_conditions( ).
     me->get_gl_accounts( ).
     me->get_tax_keys( ).
     me->get_tax_rates( ).
 
+    " Prepare a table with tax codes settings
     loop at at_tc_keys assigning <tc>.
       clear: ls_settings.
       ls_settings-mwart  = <tc>-mwart.
       ls_settings-zmwsk  = <tc>-zmwsk.
       ls_settings-egrkz  = <tc>-egrkz.
       ls_settings-xinact = <tc>-xinact.
+      ls_settings-pruef  = <tc>-pruef.
+      ls_settings-mossc  = <tc>-mossc.
 
       " Retrieve tax code name
       ls_settings-name  = get_tc_name( <tc>-mwskz ).
@@ -100,11 +105,9 @@ class lcl_tc_master_data implementation.
         " Retrieve GL account
         ls_settings-konts = get_gl_account( iv_key = ls_settings-kvsll iv_mwskz = ls_settings-mwskz ).
 
-        append ls_settings to at_settings.
+        append ls_settings to rt_tc_settings.
       endloop.
     endloop.
-
-    rt_tc_settings = at_settings.
   endmethod.
 
   method get_tax_keys.

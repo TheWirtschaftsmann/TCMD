@@ -22,8 +22,7 @@
   types: ty_tt_tc_keys     type standard table of t007a with default key.
   types: ty_tt_tc_settings type standard table of zfi_tcmd_tc_settings with default key.
 
-
-  tables: t004, t005, t007a, t007s.
+  tables: t005, t007a, t007s.
 
   data: ok_code       type sy-ucomm,
         gs_selopt     type ty_selopts,

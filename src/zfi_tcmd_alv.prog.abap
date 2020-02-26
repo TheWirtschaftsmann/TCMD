@@ -8,12 +8,16 @@ end-of-definition.
 
 class lcl_view definition inheriting from cl_gui_alv_grid.
   public section.
-    methods: constructor      importing iv_parent  type ref to cl_gui_container.
-    methods: setup_alv        importing iv_names   type abap_bool
-                              changing ct_data     type standard table.
+    methods: constructor      importing iv_parent   type ref to cl_gui_container.
+    methods: setup_alv        importing iv_set_mode type abap_bool
+                              changing ct_data      type standard table.
   private section.
-    methods: build_fieldcatalog importing iv_names type abap_bool
-                                returning value(rt_fieldcat)  type lvc_t_fcat.
+    constants: c_settings_mode     type char1 value 'S'.
+    constants: c_translations_mode type char1 value 'T'.
+
+    data: av_display_mode type char1.
+
+    methods: build_fieldcatalog returning value(rt_fieldcat)  type lvc_t_fcat.
     methods: build_layout       returning value(rs_layout)    type lvc_s_layo.
     methods: build_variant      returning value(rs_variant)   type disvariant.
     methods: exclude_buttons    returning value(rt_excluding) type ui_functions.
@@ -33,10 +37,17 @@ class lcl_view implementation.
       ls_variant   type disvariant,
       lt_excluding type ui_functions.
 
+    " Set display mode
+    if iv_set_mode = abap_true.
+      av_display_mode = c_settings_mode.
+    else.
+      av_display_mode = c_translations_mode.
+    endif.
+
     " Prepare technical components of ALV-view
     ls_layout    = me->build_layout( ).
     ls_variant   = me->build_variant( ).
-    lt_fieldcat  = me->build_fieldcatalog( iv_names ).
+    lt_fieldcat  = me->build_fieldcatalog( ).
     lt_excluding = me->exclude_buttons( ).
 
     " Pass data for ALV-display
@@ -61,10 +72,10 @@ class lcl_view implementation.
       lv_structure type slis_tabname,
       lt_fieldcat  type lvc_t_fcat.
 
-    if iv_names = abap_true.
-      lv_structure = lc_tc_name_str.
-    else.
+    if av_display_mode = c_settings_mode.
       lv_structure = lc_tc_sets_str.
+    else.
+      lv_structure = lc_tc_name_str.
     endif.
 
     call function 'LVC_FIELDCATALOG_MERGE'
@@ -105,5 +116,7 @@ class lcl_view implementation.
     add_exclude cl_gui_alv_grid=>mc_fc_loc_append_row.
     add_exclude cl_gui_alv_grid=>mc_fc_check.
     add_exclude cl_gui_alv_grid=>mc_fc_refresh.
+    add_exclude cl_gui_alv_grid=>mc_fc_subtot.
+    add_exclude cl_gui_alv_grid=>mc_fc_sum.
   endmethod.
 endclass.
