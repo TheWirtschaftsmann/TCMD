@@ -26,11 +26,11 @@ Examples of each report mode can be found below.
 
 ***Translations mode:***
 
-![translations_mode](C:\GIT\TCMD\docs\Pictures\translations_mode.jpg)
+![translations_mode](https://github.com/TheWirtschaftsmann/TCMD/blob/master/docs/Pictures/translations_mode.jpg)
 
 ***Settings mode:***
 
-![settings_mode](C:\GIT\TCMD\docs\Pictures\settings_mode.jpg)
+![settings_mode](https://github.com/TheWirtschaftsmann/TCMD/blob/master/docs/Pictures/settings_mode.jpg)
 
 ## Supplementary documents
 
