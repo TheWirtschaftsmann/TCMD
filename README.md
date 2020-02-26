@@ -9,6 +9,29 @@ Report values are displayed as ALV-report which can be saved as Excel-file.
 
 **Note**: there is a standard SAP report `RF_STEUERINFO` (accessible via t-code `S_ALR_87012365`), but this report displays too much information at once and it is not possible to store the results as Excel-file for further analysis.
 
+## Target audience
+
+This report is intended for SAP consultants, working on implementation of VAT functionalities in SAP, but it can be used by end users' as well as a source of information on:
+
+- The list of available tax codes for a country;
+- GL accounts determination for these tax codes.
+
+## Report screenshots
+
+Selection screen of the report:
+
+![selection_screen](C:\GIT\TCMD\docs\Pictures\selection_screen.jpg)
+
+Examples of each report mode can be found below. 
+
+***Translations mode:***
+
+![translations_mode](C:\GIT\TCMD\docs\Pictures\translations_mode.jpg)
+
+***Settings mode:***
+
+![settings_mode](C:\GIT\TCMD\docs\Pictures\settings_mode.jpg)
+
 ## Supplementary documents
 
 - [Technical architecture](docs/solution-architecture.md) - description of overall technical solution.
