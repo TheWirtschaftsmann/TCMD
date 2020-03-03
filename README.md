@@ -32,6 +32,12 @@ Examples of each report mode can be found below.
 
 ![settings_mode](https://github.com/TheWirtschaftsmann/TCMD/blob/master/docs/Pictures/settings_mode.jpg)
 
+### Installation
+
+Report can be installed via 
+
+[abapGit]: https://github.com/larshp/abapGit.
+
 ## Supplementary documents
 
 - [Technical architecture](docs/solution-architecture.md) - description of overall technical solution.
