@@ -34,9 +34,7 @@ Examples of each report mode can be found below.
 
 ### Installation
 
-Report can be installed via 
-
-[abapGit]: https://github.com/larshp/abapGit.
+Report can be installed via [abapGit](https://github.com/larshp/abapGit).
 
 ## Supplementary documents
 
