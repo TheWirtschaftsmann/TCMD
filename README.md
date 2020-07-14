@@ -32,7 +32,9 @@ Examples of each report mode can be found below.
 
 ![settings_mode](https://github.com/TheWirtschaftsmann/TCMD/blob/master/docs/Pictures/settings_mode.jpg)
 
+***Drill down to tax code level:***
 
+![drill down](https://github.com/TheWirtschaftsmann/TCMD/blob/master/docs/Pictures/drill_down_view.jpg)
 
 ### Installation
 
