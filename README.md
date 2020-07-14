@@ -5,7 +5,7 @@ Report on tax codes master data (also referred to as *TCMD report*) is a report 
 - Tax codes descriptions - report extracts translations for tax code descriptions in all languages or in a particular language;
 - Tax codes settings - report extracts tax codes settings i.e. transaction type, GL accounts etc.
 
-Report values are displayed as ALV-report which can be saved as Excel-file.
+Report values are displayed as ALV-report which can be saved as Excel-file. Both report modes support drill-down to tax code level i.e. to transaction `FTXP`.
 
 **Note**: there is a standard SAP report `RF_STEUERINFO` (accessible via t-code `S_ALR_87012365`), but this report displays too much information at once and it is not possible to store the results as Excel-file for further analysis.
 
@@ -31,6 +31,8 @@ Examples of each report mode can be found below.
 ***Settings mode:***
 
 ![settings_mode](https://github.com/TheWirtschaftsmann/TCMD/blob/master/docs/Pictures/settings_mode.jpg)
+
+
 
 ### Installation
 
