@@ -8,9 +8,9 @@ end-of-definition.
 
 class lcl_view definition inheriting from cl_gui_alv_grid.
   public section.
-    methods: constructor      importing iv_parent   type ref to cl_gui_container.
-    methods: setup_alv        importing iv_set_mode type abap_bool
-                              changing ct_data      type standard table.
+    methods: constructor importing iv_parent   type ref to cl_gui_container.
+    methods: setup_alv   importing iv_set_mode type abap_bool
+                         changing  ct_data     type standard table.
   private section.
     constants: c_settings_mode     type char1 value 'S'.
     constants: c_translations_mode type char1 value 'T'.
@@ -21,6 +21,10 @@ class lcl_view definition inheriting from cl_gui_alv_grid.
     methods: build_layout       returning value(rs_layout)    type lvc_s_layo.
     methods: build_variant      returning value(rs_variant)   type disvariant.
     methods: exclude_buttons    returning value(rt_excluding) type ui_functions.
+    methods: display_tax_code   importing iv_mwskz type mwskz raising lcx_exception.
+
+    methods: handle_double_click for event double_click of cl_gui_alv_grid importing e_row e_column.
+
 endclass.
 
 class lcl_view implementation.
@@ -61,6 +65,8 @@ class lcl_view implementation.
       changing
         it_outtab            = ct_data
         it_fieldcatalog      = lt_fieldcat.
+
+    set handler me->handle_double_click for me.
   endmethod.
 
   method build_fieldcatalog.
@@ -118,5 +124,48 @@ class lcl_view implementation.
     add_exclude cl_gui_alv_grid=>mc_fc_refresh.
     add_exclude cl_gui_alv_grid=>mc_fc_subtot.
     add_exclude cl_gui_alv_grid=>mc_fc_sum.
+  endmethod.
+
+  method handle_double_click.
+    data:
+          lv_msg type string,
+          lo_ex  type ref to lcx_exception.
+
+    field-symbols:
+                   <data_table> type standard table,
+                   <tc_md> type zfi_tcmd_tc_settings.
+
+    assign me->mt_outtab->* to <data_table>.
+
+    if sy-subrc is not initial or e_row-rowtype is not initial.
+      return.
+    endif.
+
+    read table <data_table> assigning <tc_md> index e_row-index.
+
+    try.
+      me->display_tax_code( <tc_md>-mwskz ).
+    catch lcx_exception into lo_ex.
+      message lo_ex->mv_message type 'S'.
+    endtry.
+  endmethod.
+
+  method display_tax_code.
+    call function 'AUTHORITY_CHECK_TCODE'
+      exporting
+        tcode  = 'FTXP'
+      exceptions
+        ok     = 0
+        not_ok = 1
+        others = 2.
+    if sy-subrc is not initial.
+      raise exception type lcx_exception
+        exporting
+          i_message = 'Missing authorization for transaction FTXP'.
+    endif.
+
+    set parameter id 'LND' field 'UA'.
+    set parameter id 'TAX' field iv_mwskz.
+    call transaction 'FTXP' and skip first screen.
   endmethod.
 endclass.
