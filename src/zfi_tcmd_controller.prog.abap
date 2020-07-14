@@ -38,10 +38,20 @@ class lcl_controller implementation.
 
     if as_selopts-p_set = abap_true.
       at_tc_settings = me->o_data->get_settings( ).
-      me->o_view->setup_alv( exporting iv_set_mode = as_selopts-p_set changing ct_data  = at_tc_settings ).
+      me->o_view->setup_alv(
+        exporting
+          iv_set_mode = as_selopts-p_set
+          iv_country  = as_selopts-land1
+        changing
+          ct_data  = at_tc_settings ).
     elseif as_selopts-p_trn = abap_true.
       at_tc_names    = me->o_data->get_names( ).
-      me->o_view->setup_alv( exporting iv_set_mode = as_selopts-p_set changing ct_data  = at_tc_names ).
+      me->o_view->setup_alv(
+        exporting
+          iv_set_mode = as_selopts-p_set
+          iv_country  = as_selopts-land1
+        changing
+          ct_data  = at_tc_names ).
     else.
       " Reserved for future cases
     endif.

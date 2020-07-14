@@ -10,12 +10,14 @@ class lcl_view definition inheriting from cl_gui_alv_grid.
   public section.
     methods: constructor importing iv_parent   type ref to cl_gui_container.
     methods: setup_alv   importing iv_set_mode type abap_bool
+                                   iv_country  type land1
                          changing  ct_data     type standard table.
   private section.
     constants: c_settings_mode     type char1 value 'S'.
     constants: c_translations_mode type char1 value 'T'.
 
     data: av_display_mode type char1.
+    data: av_country      type land1.
 
     methods: build_fieldcatalog returning value(rt_fieldcat)  type lvc_t_fcat.
     methods: build_layout       returning value(rs_layout)    type lvc_s_layo.
@@ -40,6 +42,8 @@ class lcl_view implementation.
       ls_layout    type lvc_s_layo,
       ls_variant   type disvariant,
       lt_excluding type ui_functions.
+
+    av_country = iv_country.
 
     " Set display mode
     if iv_set_mode = abap_true.
@@ -128,12 +132,14 @@ class lcl_view implementation.
 
   method handle_double_click.
     data:
-          lv_msg type string,
-          lo_ex  type ref to lcx_exception.
+          lv_mwskz type mwskz,
+          lv_msg   type string,
+          lo_ex    type ref to lcx_exception.
 
     field-symbols:
                    <data_table> type standard table,
-                   <tc_md> type zfi_tcmd_tc_settings.
+                   <tc_md>      type zfi_tcmd_tc_settings,
+                   <tc_names>   type t007s.
 
     assign me->mt_outtab->* to <data_table>.
 
@@ -141,10 +147,16 @@ class lcl_view implementation.
       return.
     endif.
 
-    read table <data_table> assigning <tc_md> index e_row-index.
+    if av_display_mode = c_settings_mode.
+      read table <data_table> assigning <tc_md> index e_row-index.
+      lv_mwskz = <tc_md>-mwskz.
+    else.
+      read table <data_table> assigning <tc_names> index e_row-index.
+      lv_mwskz = <tc_names>-mwskz.
+    endif.
 
     try.
-      me->display_tax_code( <tc_md>-mwskz ).
+      me->display_tax_code( lv_mwskz ).
     catch lcx_exception into lo_ex.
       message lo_ex->mv_message type 'S'.
     endtry.
@@ -164,7 +176,7 @@ class lcl_view implementation.
           i_message = 'Missing authorization for transaction FTXP'.
     endif.
 
-    set parameter id 'LND' field 'UA'.
+    set parameter id 'LND' field av_country.
     set parameter id 'TAX' field iv_mwskz.
     call transaction 'FTXP' and skip first screen.
   endmethod.
